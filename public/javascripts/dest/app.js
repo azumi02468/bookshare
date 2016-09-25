@@ -29,17 +29,6 @@ $(function(){
             return false;
         }
     })
-
-    // 書籍検索画面オプション制御
-    $('#c_owner').change(function(){
-        if (!$('#c_owner:checked').val() == "on") {
-            $('th:nth-of-type(2)').css("display", "none");
-            $('td:nth-of-type(2)').css("display", "none");
-        } else {
-            $('th:nth-of-type(2)').css("display", "show");
-            $('td:nth-of-type(2)').css("display", "show");
-        }
-    });
 });
 // 書籍一括登録Module
 angular.module("bulkModule", [])
