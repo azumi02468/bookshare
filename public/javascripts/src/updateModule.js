@@ -21,4 +21,16 @@ angular.module("updateModule", [])
         // $scope.len = function(length) {
         //     len = length;
         // }
+
+        // クリックイベント
+        $scope.click = function(data){
+            console.log("クリックされたのは、" + data.title);
+            $scope.u_title = data.title;
+            $scope.u_author = data.author;
+            $scope.u_publisherName = data.publisherName;
+            $scope.u_salesDate = data.salesDate;
+            $scope.u_itemPrice = data.itemPrice;
+            $scope.u_count = data.count;
+            $scope.u_remark = data.remark;
+        }
     }])

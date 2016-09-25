@@ -120,10 +120,12 @@
                 <td ng-show="c_count"><%= data[i].count %></td>
                 <td ng-show="c_remark"><%= data[i].remark %></td>
             </tr>
-            <% include mp_send_message %>
             <% } %>
         </tbody>
     </table>
+    <% for (var i=0; i<data.length; i++) { %>
+        <% include mp_send_message %>
+    <% } %>
     <ul class="pagination">
         <% for (var j=0; j<data.length/10; j++) { %>
             <li><a href="#" ng-click="pager(<%= j %>)"><%= j+1 %></a></li>

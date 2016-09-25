@@ -32,7 +32,3 @@ angular.module("searchModule", [])
         //     len = length;
         // }
     }])
-    .controller("SearchSubCtrl", ["$scope", function($scope){
-        // メッセージ送信ポップアップ
-        console.log($scope);
-    }])

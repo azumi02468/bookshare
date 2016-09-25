@@ -32,14 +32,16 @@
                 <td><%= data[i].disp_mode %></td>
                 <td><%= data[i].count %></td>
                 <td><%= data[i].remark %></td>
-                <td><a href="#update<%= i %>" class="btn btn-info" data-toggle="modal" data-target="#update<%= i %>">更新</a></td>
+                <td><a href="#update<%= i %>" class="btn btn-info" data-toggle="modal" data-target="#update<%= i %>" ng-click="click(<%= JSON.stringify(data[i]) %>)">更新</a></td>
                 <td><a href="#delete<%= i %>" class="btn btn-info" data-toggle="modal" data-target="#delete<%= i %>">削除</a></td>
             </tr>
-            <% include mp_up_book %>
-            <% include mp_del_book %>
             <% } %>
         </tbody>
     </table>
+    <% for (var i=0; i<data.length; i++) { %>
+        <% include mp_up_book %>
+        <% include mp_del_book %>
+    <% } %>
     <ul class="pagination">
         <% for (var j=0; j<data.length/10; j++) { %>
             <li><a href="#" ng-click="pager(<%= j %>)"><%= j+1 %></a></li>
