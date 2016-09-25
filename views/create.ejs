@@ -28,8 +28,9 @@
         <p ng-show="create.pass_confirm.$error.mismatch">入力されたパスワードと一致していません。</p>
     </div>
     <div　class="form-group">
-        <input type="submit" class="btn btn-primary" id="btn_create" value="登録" ng-disabled="create.$invalid">
+        <a href="#confirm_create" class="btn btn-primary" id="btn_create" data-toggle="modal" data-target="#confirm_create" ng-disabled="create.$invalid">登録</a>
     </div>
+    <% include mp_alert %>
 </form>
 <br>
 <a href="/">ログイン画面へ戻る</a>

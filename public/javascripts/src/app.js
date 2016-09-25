@@ -2,8 +2,8 @@ angular.module("BookShare", [
     "registModule",// 書籍登録Module
     "bulkModule",// 書籍一括登録Module
     "updateModule",// 書籍更新削除Module
-    "topModule",//TOPModule
-    "searchModule" //書籍検索Module
+    "topModule",// TOPModule
+    "searchModule"// 書籍検索Module
     ])
     .controller("MainCtrl", ["$scope", function($scope){
     }])
@@ -20,13 +20,4 @@ angular.module("BookShare", [
                 });
             }
         }
-    }]);
-
-$(function(){
-    // 登録ボタン押下時
-    $('#user_form').submit(function(){
-        if (!confirm("入力した内容で登録します。よろしいですか。")){
-            return false;
-        }
-    })
-});
+    }])
