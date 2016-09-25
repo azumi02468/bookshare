@@ -1,0 +1,48 @@
+<% include header %>
+<h1>本棚に登録</h1>
+<form class="form-horizontal" name="regist" method="post" action="/regist">
+    <div　class="form-group">
+        <label for="isbn" class="control-label">ISBN</label>
+        <input type="text" class="form-control" id="isbn" name="isbn" value="<%= isbn %>" readonly />
+    </div>
+    <div　class="form-group">
+        <label for="title" class="control-label">書籍名</label>
+        <input type="text" class="form-control" id="title" name="title" value="<%= data.title %>" readonly />
+    </div>
+    <div　class="form-group">
+        <label for="author" class="control-label">著者</label>
+        <input type="text" class="form-control" id="author" name="author" value="<%= data.author %>" readonly />
+    </div>
+    <div　class="form-group">
+        <label for="publisherName" class="control-label">出版社</label>
+        <input type="text" class="form-control" id="publisherName" name="publisherName" value="<%= data.publisherName %>" readonly />
+    </div>
+    <div　class="form-group">
+        <label for="salesDate" class="control-label">発売日</label>
+        <input type="text" class="form-control" id="salesDate" name="salesDate" value="<%= data.salesDate %>" readonly />
+    </div>
+    <div　class="form-group">
+        <label for="itemPrice" class="control-label">価格</label>
+        <input type="text" class="form-control" id="itemPrice" name="itemPrice" value="<%= data.itemPrice %>" readonly />
+    </div>
+    <div　class="form-group">
+        <label for="mode" class="control-label">閲覧モード</label>
+        <input type="text" class="form-control" id="mode" name="mode" value="<%= mode %>" readonly />
+    </div>
+    <div　class="form-group">
+        <label for="count" class="control-label">本の冊数</label>
+        <input type="text" class="form-control" id="count" name="count" value="<%= count %>" readonly />
+    </div>
+    <div　class="form-group">
+        <label for="remark" class="control-label">本の備考</label>
+        <textarea class="form-control" id="remark" name="remark" readonly><%= remark %></textarea>
+    </div>
+    <div　class="form-group">
+        <input type="hidden" id="im_flg" name="im_flg" value="<%= im_flg %>" />
+    </div>
+    <div　class="form-group">
+        <button class="btn btn-info" id="regist">登録</button>
+    </div>
+</form>
+<button type="button" class="btn btn-default" onClick="history.back()">登録画面に戻る</button>
+<% include footer %>

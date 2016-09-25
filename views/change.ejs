@@ -1,0 +1,33 @@
+<% include header %>
+<h1>パスワード変更</h1>
+<p>新しいパスワードへの変更を行います。</p>
+<p><%= message %></p>
+<form class="form-horizontal" name="change" method="post" action="/change" novalidate>
+    <div　class="form-group">
+        <label for="current_pass" class="control-label">現在のパスワード</label>
+        <input type="password" class="form-control" id="current_pass" name="current_pass" placeholder="パスワード" ng-model="current_pass" ng-pattern="/^[a-zA-Z0-9]*$/" ng-minlength="4" maxlength="8" required />
+        <p ng-show="change.current_pass.$error.required">入力必須です。</p>
+        <p ng-show="change.current_pass.$error.pattern">パスワードは、半角英数字のみにしてください。</p>
+        <p ng-show="change.current_pass.$error.minlength">パスワードは、4文字以上にしてください。</p>
+    </div>
+    <div　class="form-group">
+        <label for="new_pass" class="control-label">新しいパスワード</label>
+        <input type="password" class="form-control" id="new_pass" name="new_pass" placeholder="パスワード" ng-model="new_pass" ng-pattern="/^[a-zA-Z0-9]*$/" ng-minlength="4" maxlength="8" required />
+        <p ng-show="change.new_pass.$error.required">入力必須です。</p>
+        <p ng-show="change.new_pass.$error.pattern">パスワードは、半角英数字のみにしてください。</p>
+        <p ng-show="change.new_pass.$error.minlength">パスワードは、4文字以上にしてください。</p>
+    </div>
+    <div　class="form-group">
+        <label for="new_pass_confirm" class="control-label">新しいパスワードの再入力</label>
+        <input type="password" class="form-control" id="new_pass_confirm" name="new_pass_confirm" placeholder="パスワード" ng-model="new_pass_confirm" ng-pattern="/^[a-zA-Z0-9]*$/" ng-minlength="4" maxlength="8" match="new_pass" required />
+        <p ng-show="change.new_pass_confirm.$error.required">入力必須です。</p>
+        <p ng-show="change.new_pass_confirm.$error.pattern">パスワードは、半角英数字のみにしてください。</p>
+        <p ng-show="change.new_pass_confirm.$error.minlength">パスワードは、4文字以上にしてください。</p>
+        <p ng-show="change.new_pass_confirm.$error.mismatch">入力されたパスワードと一致していません。</p>
+    </div>
+    <div　class="form-group">
+        <input type="submit" class="btn btn-primary" value="パスワード変更" ng-disabled="change.$invalid">
+    </div>
+</form>
+<a href="/top" class="btn btn-default">TOPへ戻る</a>
+<% include footer %>

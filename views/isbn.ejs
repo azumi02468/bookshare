@@ -1,0 +1,22 @@
+<form class="form-horizontal" id="i_confirm" name="i_confirm" method="post" action="/confirm/isbn" ng-model="i_confirm" ng-show="isbn_flg" novalidate>
+    <label for="i_isbn" class="control-label">ISBN</label>
+    <input type="text" class="form-control" id="i_isbn" name="i_isbn" ng-model="i_isbn" ng-change="change_isbn()" ng-pattern="/^[0-9-]*$/" ng-minlength="13" required />
+    <p ng-show="i_confirm.i_isbn.$error.required">入力必須です。</p>
+    <p ng-show="i_confirm.i_isbn.$error.pattern">ISBNは、半角数字または半角ハイフン(-)のみにしてください。</p>
+    <p ng-show="i_confirm.i_isbn.$error.minlength">ISBNは、半角数字13桁にしてください。（半角ハイフン(-)は数えません。）</p>
+    <p ng-show="check_max_isbn()">ISBNは、半角数字13桁にしてください。</p>
+    <label for="i_open" class="control-label">閲覧モード</label>
+    <input type="radio" id="i_open" name="i_mode" value="0" checked />
+    <label for="i_open" class="control-label">共有</label>
+    <input type="radio" id="i_private" name="i_mode" value="1" />
+    <label for="i_private" class="control-label">プライベート</label>
+    <br>
+    <label for="i_count" class="control-label">本の冊数</label>
+    <input type="text" class="form-control" id="i_count" name="i_count" ng-model="i_count" min="0" maxlength="3" ng-pattern="/^[0-9]*$/" required />
+    <p ng-show="i_confirm.i_count.$error.required">入力必須です。</p>
+    <p ng-show="i_confirm.i_count.$error.pattern">本の冊数は、半角数字のみにしてください。</p>
+    <label for="i_remark" class="control-label">本の備考</label>
+    <textarea class="form-control" id="i_remark" name="i_remark" maxlength="200"></textarea>
+    <input type="hidden" id="i_flg" name="i_flg" value="isbn" />
+    <button class="btn btn-info" id="i_confirm_btn" ng-disabled="i_confirm.$invalid || check_max_isbn()">登録確認</button>
+</form>

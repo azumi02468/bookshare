@@ -1,0 +1,62 @@
+<div class="modal" role="dialog" area-hidden="true" id="update<%= i %>">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">本の情報を変更する</h4>
+            </div>
+            <div class="modal-body">
+                <p>変更する内容を入力してください。</p>
+                <form name="update" method="post" action="/update" novalidate>
+                    <input type="hidden" id="u_isbn" name="u_isbn" value="<%= data[i].isbn %>" />
+                    <input type="hidden" id="u_im_flg" name="u_im_flg" value="<%= data[i].im_flg %>" />
+                    <div class="form-group">
+                        <label for="u_title" class="control-label">書籍名</label>
+                        <input type="text" class="form-control" id="u_title" name="u_title" value="<%= data[i].title %>" <% if(!data[i].im_flg){ %>readonly<% } %> ng-model="u_title" maxlength="100" required />
+                        <p ng-show="update.u_title.$error.required">入力必須です。</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="u_author" class="control-label">著者</label>
+                        <input type="text" class="form-control" id="u_author" name="u_author" value="<%= data[i].author %>" <% if(!data[i].im_flg){ %>readonly<% } %> maxlength="20 />
+                    </div>
+                    <div class="form-group">
+                        <label for="u_publisherName" class="control-label">出版社</label>
+                        <input type="text" class="form-control" id="u_publisherName" name="u_publisherName" value="<%= data[i].publisherName %>" <% if(!data[i].im_flg){ %>readonly<% } %> maxlength="50" />
+                    </div>
+                    <div class="form-group">
+                        <label for="u_salesDate" class="control-label">発売日</label>
+                        <input type="text" class="form-control" id="u_salesDate" name="u_salesDate" value="<%= data[i].salesDate %>" <% if(!data[i].im_flg){ %>readonly<% } %> maxlength="20" />
+                    </div>
+                    <div class="form-group">
+                        <label for="u_itemPrice" class="control-label">価格</label>
+                        <input type="text" class="form-control" id="u_itemPrice" name="u_itemPrice" value="<%= data[i].itemPrice %>" ng-model="u_itemPrice" ng-pattern="/^[0-9]*$/" maxlength="6" <% if(!data[i].im_flg){ %>readonly<% } %> />
+                        <p ng-show="update.u_itemPrice.$error.pattern">価格は、半角数字のみにしてください。</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="u_open" class="control-label">閲覧モード</label>
+                        <input type="radio" id="u_open" name="u_mode" value="0" <% if(!data[i].private){ %>checked<% } %> />
+                        <label for="u_open" class="control-label">共有</label>
+                        <input type="radio" id="u_private" name="u_mode" value="1" <% if(data[i].private){ %>checked<% } %> />
+                        <label for="u_private" class="control-label">プライベート</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="u_count" class="control-label">冊数</label>
+                        <input type="text" class="form-control" id="u_count" name="u_count" value="<%= data[i].count %>" ng-model="u_count" min="0" maxlength="3" ng-pattern="/^[0-9]*$/" required />
+                        <p ng-show="update.u_count.$error.required">入力必須です。</p>
+                        <p ng-show="update.u_count.$error.pattern">本の冊数は、半角数字のみにしてください。</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="u_remark" class="control-label">本の備考</label>
+                        <textarea class="form-control" id="u_remark" name="u_remark" maxlength="200"><%= data[i].remark %></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success" ng-disabled="update.$invalid">更新</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal">閉じる</button>
+            </div>
+        </div>
+    </div>
+</div>

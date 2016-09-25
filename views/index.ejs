@@ -1,0 +1,30 @@
+<% include header %>
+<h1>ログイン</h1>
+<p><%= message %></p>
+<form class="form-horizontal" name="login" method="post" action="/login" novalidate>
+    <div　class="form-group">
+        <label for="user" class="control-label">ユーザID</label>
+        <input type="text" class="form-control" id="user" name="user" placeholder="ユーザID" ng-model="user" ng-required="true" ng-pattern="/^[a-zA-Z0-9]*$/">
+        <p ng-show="login.user.$error.required">入力必須です。</p>
+        <p ng-show="login.user.$error.pattern">ユーザIDは、半角英数字のみにしてください。</p>
+    </div>
+    <div　class="form-group">
+        <label for="pass" class="control-label">パスワード</label>
+        <input type="password" class="form-control" id="pass" name="pass" placeholder="パスワード" ng-model="pass" ng-required="true" ng-pattern="/^[a-zA-Z0-9]*$/" ng-minlength="4" maxlength="8">
+        <p ng-show="login.pass.$error.required">入力必須です。</p>
+        <p ng-show="login.pass.$error.pattern">パスワードは、半角英数字のみにしてください。</p>
+        <p ng-show="login.pass.$error.minlength">パスワードは、4文字以上にしてください。</p>
+    </div>
+    <div　class="form-group">
+        <input type="submit" class="btn btn-primary" value="ログイン" ng-disabled="login.$invalid">
+    </div>
+</form>
+<br>
+<a href="/create">新規ユーザ登録はこちらのリンクをクリックしてください。</a>
+<br><br><br>
+<div>
+    <p>このシステムのバージョンは、<a href="#version" data-toggle="modal" data-target="#version"><%= version %></a>です。</p>
+    <% include mp_disp_version %>
+    <p>現在、<%= user_count %>人の方に使用いただいております。</p>
+</div>
+<% include footer %>

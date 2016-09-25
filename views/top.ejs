@@ -1,0 +1,51 @@
+<% include header %>
+<h1>TOP</h1>
+<p><%= message %></p>
+<p>ようこそ、<%= name %>さん。</p>
+<div class="table">
+    <a href="/regist" class="btn btn-info btn-lg">本棚に登録</a>
+    <a href="/bulk" class="btn btn-danger btn-lg">一括登録</a>
+    <a href="/update" class="btn btn-info btn-lg">本棚を整理</a>
+    <a href="/search" class="btn btn-info btn-lg">本棚を閲覧</a>
+    <a href="/change" class="btn btn-info btn-lg">パスワードを変更</a>
+</div>
+<br>
+<h3>メッセージボード</h3>
+<% if (ms_data.length !== 0) { %>
+<p>メッセージ：<%= ms_data.length %>件</p>
+<div class="table-responsive" ng-controller="TopCtrl" ng-init="pager(0)">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>日時</th>
+                <th>送信者</th>
+                <th>書籍名</th>
+                <th>あなたへのメッセージ</th>
+                <th>削除</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (var i=0; i<ms_data.length; i++) { %>
+            <tr ng-show="show(<%= i %>)">
+                <td><%= ms_data[i].current %></td>
+                <td><%= ms_data[i].from_name %></td>
+                <td><%= ms_data[i].target_book %></td>
+                <td><%= ms_data[i].ms_body %></td>
+                <td><a href="#del_message<%= i %>" class="btn btn-info" data-toggle="modal" data-target="#del_message<%= i %>">削除</a></td>
+            </tr>
+            <% include mp_del_message %>
+            <% } %>
+        </tbody>
+    </table>
+    <ul class="pagination">
+        <% for (var j=0; j<ms_data.length/5; j++) { %>
+            <li><a href="#" ng-click="pager(<%= j %>)"><%= j+1 %></a></li>
+        <% } %>
+    </ul>
+</div>
+<% } else { %>
+<p>メッセージはありません。</p>
+<% } %>
+<br>
+<a href="/logout" class="btn btn-primary">ログアウト</a>
+<% include footer %>

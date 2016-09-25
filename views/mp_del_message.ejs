@@ -1,0 +1,40 @@
+<div class="modal" role="dialog" area-hidden="true" id="del_message<%= i %>">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">メッセージ削除</h4>
+            </div>
+            <div class="modal-body">
+                <p>下記のメッセージを削除します。よろしいですか？</p>
+                <div class="form-group">
+                    <label for="d_current" class="control-label">日時</label>
+                    <input type="text" class="form-control" id="d_current" name="d_current" value="<%= ms_data[i].current %>" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="d_from_user" class="control-label">送信者</label>
+                    <input type="text" class="form-control" id="d_from_name" name="d_from_name" value="<%= ms_data[i].from_name %>" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="d_target_book" class="control-label">書籍名</label>
+                    <input type="text" class="form-control" id="d_target_book" name="d_target_book" value="<%= ms_data[i].target_book %>" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="d_ms_body" class="control-label">メッセージ</label>
+                    <input type="text" class="form-control" id="d_ms_body" name="d_ms_body" value="<%= ms_data[i].ms_body %>" readonly />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <form name="ms_delete" method="post" action="/ms_delete">
+                        <input type="hidden" id="del_current" name="del_current" value="<%= ms_data[i].current %>" />
+                        <input type="hidden" id="del_from_id" name="del_from_id" value="<%= ms_data[i].from_id %>" />
+                        <input type="hidden" id="del_from_name" name="del_from_name" value="<%= ms_data[i].from_name %>" />
+                        <input type="hidden" id="del_target_book" name="del_target_book" value="<%= ms_data[i].target_book %>" />
+                        <input type="hidden" id="del_ms_body" name="del_ms_body" value="<%= ms_data[i].ms_body %>" />
+                        <button class="btn btn-success">はい</button>
+                </form>
+                <button class="btn btn-primary" data-dismiss="modal">いいえ</button>
+            </div>
+        </div>
+    </div>
+</div>

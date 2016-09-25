@@ -1,0 +1,36 @@
+<% include header %>
+<h1>ユーザ登録</h1>
+<p><%= message %></p>
+<form id="user_form" class="form-horizontal" name="create" method="post" action="/create" novalidate>
+    <div　class="form-group">
+        <label for="name" class="control-label">氏名</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="山田太郎" ng-model="name" maxlength="20" required />
+        <p ng-show="create.name.$error.required">入力必須です。また、氏名はアプリ内で変更できません。</p>
+    </div>
+    <div　class="form-group">
+        <label for="user" class="control-label">ユーザID</label>
+        <input type="text" class="form-control" id="user" name="user" placeholder="ユーザID" ng-model="user" maxlength="10" required />
+        <p ng-show="create.user.$error.required">入力必須です。また、ユーザIDはアプリ内で変更できません。</p>
+    </div>
+    <div　class="form-group">
+        <label for="user" class="control-label">パスワード</label>
+        <input type="password" class="form-control" id="pass" name="pass" placeholder="パスワード" ng-model="pass" ng-pattern="/^[a-zA-Z0-9]*$/" ng-minlength="4" maxlength="8" required />
+        <p ng-show="create.pass.$error.required">入力必須です。</p>
+        <p ng-show="create.pass.$error.pattern">パスワードは、半角英数字のみにしてください。</p>
+        <p ng-show="create.pass.$error.minlength">パスワードは、4文字以上にしてください。</p>
+    </div>
+    <div　class="form-group">
+        <label for="user" class="control-label">パスワードの再入力</label>
+        <input type="password" class="form-control" id="pass_confirm" name="pass_confirm" placeholder="パスワード" ng-model="pass_confirm" ng-pattern="/^[a-zA-Z0-9]*$/" ng-minlength="4" maxlength="8" match="pass" required />
+        <p ng-show="create.pass_confirm.$error.required">入力必須です。</p>
+        <p ng-show="create.pass_confirm.$error.pattern">パスワードは、半角英数字のみにしてください。</p>
+        <p ng-show="create.pass_confirm.$error.minlength">パスワードは、4文字以上にしてください。</p>
+        <p ng-show="create.pass_confirm.$error.mismatch">入力されたパスワードと一致していません。</p>
+    </div>
+    <div　class="form-group">
+        <input type="submit" class="btn btn-primary" id="btn_create" value="登録" ng-disabled="create.$invalid">
+    </div>
+</form>
+<br>
+<a href="/">ログイン画面へ戻る</a>
+<% include footer %>

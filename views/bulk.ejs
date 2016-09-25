@@ -1,0 +1,36 @@
+<% include header %>
+<h1>一括登録</h1>
+<p><%= message %></p>
+<form class="form-horizontal" id="bulk" name="bulk" method="post" action="/bulk" novalidate ng-controller="BulkCtrl" ng-init="init()">
+    <% for(var i=0; i<3; i++){ %>
+    <div>
+        <input type="checkbox" id="show_form<%= i+1 %>" name="show_form<%= i+1 %>" ng-model="show_form<%= i+1 %>" <% if (i === 0) {%>disabled<% } %> />
+        <label for="show_form<%= i+1 %>">フォーム<%= i+1 %>
+    </div>
+    <div class="form<%= i+1 %>" ng-if="show_form<%= i+1 %>" ng-controller="BulkSubCtrl">
+        <label for="isbn<%= i+1 %>" class="control-label">ISBN<%= i+1 %></label>
+        <input type="text" class="form-control" id="isbn<%= i+1 %>" name="isbn<%= i+1 %>" ng-model="isbn<%= i+1 %>" ng-change="change_isbn()" ng-pattern="/^[0-9-]*$/" ng-minlength="13" required />
+        <p ng-show="bulk.isbn<%= i+1 %>.$error.required">入力必須です。</p>
+        <p ng-show="bulk.isbn<%= i+1 %>.$error.pattern">ISBNは、半角数字または半角ハイフン(-)のみにしてください。</p>
+        <p ng-show="bulk.isbn<%= i+1 %>.$error.minlength">ISBNは、半角数字13桁にしてください。（半角ハイフン(-)は数えません。）</p>
+        <p ng-show="check_max_isbn()">ISBNは、半角数字13桁にしてください。</p>
+        <label for="open<%= i+1 %>" class="control-label">閲覧モード</label>
+        <input type="radio" id="open<%= i+1 %>" name="mode<%= i+1 %>" value="0" checked/>
+        <label for="open<%= i+1 %>" class="control-label">共有</label>
+        <input type="radio" id="private<%= i+1 %>" name="mode<%= i+1 %>" value="1" />
+        <label for="private<%= i+1 %>" class="control-label">プライベート</label>
+        <br>
+        <label for="count<%= i+1 %>" class="control-label">本の冊数</label>
+        <input type="text" class="form-control" id="count<%= i+1 %>" name="count<%= i+1 %>" ng-model="count<%= i+1 %>" min="0" maxlength="3" ng-change="change_isbn()" ng-pattern="/^[0-9]*$/" required />
+        <p ng-show="bulk.count<%= i+1 %>.$error.required">入力必須です。</p>
+        <p ng-show="bulk.count<%= i+1 %>.$error.pattern">本の冊数は、半角数字のみにしてください。</p>
+        <label for="remark<%= i+1 %>" class="control-label">本の備考</label>
+        <textarea class="form-control" id="remark<%= i+1 %>" name="remark<%= i+1 %>" maxlength="200"></textarea>
+    </div>
+    <% } %>
+    <input type="hidden" id="im_flg" name="im_flg" value="isbn" />
+    <button class="btn btn-info" id="bulk_btn" ng-disabled="bulk.$invalid || check_max_isbn()">一括登録</button>
+    <p>※この登録は確認なく行われます。ご注意ください。</p>
+</form>
+<a href="/top" class="btn btn-default">TOPへ戻る</a>
+<% include footer %>

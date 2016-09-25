@@ -1,0 +1,11 @@
+<% include header %>
+<h1>本棚に登録</h1>
+<p><%- message %></p>
+<div ng-controller="RegistCtrl">
+    <input type="radio" id="isbn_regist" name="regist_type" ng-model="regist_type" value="0" ng-click="regist_change()" ng-checked="isbn_flg" /><label for="isbn_regist">ISBN登録</label>
+    <input type="radio" id="manual_regist" name="regist_type" ng-model="regist_type" value="1" ng-click="regist_change()" ng-checked="manual_flg" /><label for="manual_regist">手動登録</label>
+    <% include isbn %>
+    <% include manual %>
+</div>
+<a href="/top" class="btn btn-default">TOPへ戻る</a>
+<% include footer %>

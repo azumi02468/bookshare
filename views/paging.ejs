@@ -1,0 +1,9 @@
+<% if (data.length > 0) { %>
+<ul class="pagination">
+    <li class="prenext"><a href="#" id="prev">&laquo;</a></li>
+    <% for(var i=0; i<data.length/5; i++){ %>
+    <li class="pagings"><a href="#"><%= i + 1 %></a></li>
+    <% } %>
+    <li class="prenext"><a href="#" id="next">&raquo;</a></li>
+</ul>
+<% } %>

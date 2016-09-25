@@ -1,0 +1,36 @@
+<div class="modal" role="dialog" area-hidden="true" id="delete<%= i %>">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">削除確認</h4>
+            </div>
+            <div class="modal-body">
+                <p>下記の本を削除します。よろしいですか？</p>
+                <div class="form-group">
+                    <label for="d_isbn" class="control-label">ISBN</label>
+                    <input type="text" class="form-control" id="d_isbn" name="d_isbn" value="<%= data[i].isbn %>" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="d_title" class="control-label">書籍名</label>
+                    <input type="text" class="form-control" id="d_title" name="d_title" value="<%= data[i].title %>" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="d_author" class="control-label">著者</label>
+                    <input type="text" class="form-control" id="d_author" name="d_author" value="<%= data[i].author %>" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="d_publisherName" class="control-label">出版社</label>
+                    <input type="text" class="form-control" id="d_publisherName" name="d_publisherName" value="<%= data[i].publisherName %>" readonly />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <form name="delete" method="post" action="/delete">
+                        <input type="hidden" id="d_isbn" name="d_isbn" value="<%= data[i].isbn %>" />
+                        <button class="btn btn-success">はい</button>
+                </form>
+                <button class="btn btn-primary" data-dismiss="modal">いいえ</button>
+            </div>
+        </div>
+    </div>
+</div>

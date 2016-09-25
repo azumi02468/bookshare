@@ -1,0 +1,140 @@
+<% include header %>
+<h1>本棚を閲覧</h1>
+<p><%= message %></p>
+<div ng-controller="SearchCtrl">
+<div class="panel-group" id="search_accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="search_accordion" href="#collapseOne">検索</a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse">
+            <div class="panel-body">
+                <form name="search" method="post" action="/search">
+                    <div class="form-group">
+                        <label for="owner_name" class="control-label">所有者</label>
+                        <select class="form-control" id="owner_name" name="owner_name">
+                            <option value="">全員</option>
+                            <% for (var i=0; i<user_list.length; i++) { %>
+                                <option value="<%= user_list[i] %>"><%= user_list[i] %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="isbn" class="control-label">ISBN</label>
+                        <input type="text" class="form-control" id="isbn" name="isbn" maxlength="13" />
+                    </div>
+                    <div class="form-group">
+                        <label for="title" class="control-label">書籍名</label>
+                        <input type="text" class="form-control" id="title" name="title" maxlength="100" />
+                        <input type="checkbox" id="forward_match" name="t_search_type" value="0" /><label for="forward_match">前方一致</label>
+                        <input type="checkbox" id="backward_match" name="t_search_type" value="1" /><label for="backward_match">後方一致</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="author" class="control-label">著者</label>
+                        <input type="text" class="form-control" id="author" name="author" maxlength="20" />
+                    </div>
+                    <div class="form-group">
+                        <label for="publisherName" class="control-label">出版社</label>
+                        <input type="text" class="form-control" id="publisherName" name="publisherName" maxlength="50" />
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-info" id="search_btn">検索</button>
+                    </div>
+                </form>
+                <a data-toggle="collapse" data-parent="search_accordion" href="#collapseOne" class="btn btn-default">アコーディオンを閉じる</a>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="search_accordion" href="#collapseTwo">オプション</a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+            <div class="panel-body form-inline">
+                <div class="form-group">
+                    <input type="checkbox" id="c_owner" name="c_owner" ng-model="c_owner" /><label for="c_owner">所有者</label>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="c_isbn" name="c_isbn" ng-model="c_isbn" /><label for="c_isbn">ISBN</label>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="c_title" name="c_title" ng-model="c_title" /><label for="c_title">書籍名</label>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="c_author" name="c_author" ng-model="c_author" /><label for="c_author">著者</label>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="c_publisherName" name="c_publisherName" ng-model="c_publisherName" /><label for="c_publisherName">出版社</label>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="c_salesDate" name="c_salesDate" ng-model="c_salesDate" /><label for="c_salesDate">発売日</label>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="c_itemPrice" name="c_itemPrice" ng-model="c_itemPrice" /><label for="c_itemPrice">価格</label>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="c_count" name="c_count" ng-model="c_count" /><label for="c_count">冊数</label>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="c_remark" name="c_remark" ng-model="c_remark" /><label for="c_remark">備考</label>
+                </div>
+                <a data-toggle="collapse" data-parent="search_accordion" href="#collapseTwo" class="btn btn-default">アコーディオンを閉じる</a>
+            </div>
+        </div>
+    </div>
+</div>
+<h3>検索結果</h3>
+<% if (data.length > 0) { %>
+<p><%= data.length %>件ヒットしました。</p>
+<div class="table-responsive" ng-init="pager(0)">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th ng-show="c_owner">所有者</th>
+                <th ng-show="c_isbn">ISBN</th>
+                <th ng-show="c_title">書籍名</th>
+                <th ng-show="c_author">著者</th>
+                <th ng-show="c_publisherName">出版社</th>
+                <th ng-show="c_salesDate">発売日</th>
+                <th ng-show="c_itemPrice">価格</th>
+                <th ng-show="c_count">冊数</th>
+                <th ng-show="c_remark">備考</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (var i=0; i<data.length; i++) { %>
+            <tr ng-show="show(<%= i %>)">
+                <td><%= i + 1 %></td>
+                <td ng-show="c_owner"><a href="#message<%= i %>" data-toggle="modal" data-target="#message<%= i %>"><%= data[i].owner_name %></a></td>
+                <td ng-show="c_isbn"><%= data[i].isbn %></td>
+                <td ng-show="c_title"><%= data[i].title %></td>
+                <td ng-show="c_author"><%= data[i].author %></td>
+                <td ng-show="c_publisherName"><%= data[i].publisherName %></td>
+                <td ng-show="c_salesDate"><%= data[i].salesDate %></td>
+                <td ng-show="c_itemPrice"><%= data[i].itemPrice %></td>
+                <td ng-show="c_count"><%= data[i].count %></td>
+                <td ng-show="c_remark"><%= data[i].remark %></td>
+            </tr>
+            <% include mp_send_message %>
+            <% } %>
+        </tbody>
+    </table>
+    <ul class="pagination">
+        <% for (var j=0; j<data.length/10; j++) { %>
+            <li><a href="#" ng-click="pager(<%= j %>)"><%= j+1 %></a></li>
+        <% } %>
+    </ul>
+</div>
+<a href="/search/csv" class="btn btn-default">CSVダウンロード</a>
+<% } else { %>
+検索結果はありません。
+<% } %>
+</div>
+<br>
+<a href="/top" class="btn btn-default">TOPへ戻る</a>
+<% include footer %>
