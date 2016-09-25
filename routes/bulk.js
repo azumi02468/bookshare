@@ -54,18 +54,25 @@ var bulk_post = function(req, res){
             "mode": req.body.mode1,
             "count": req.body.count1,
             "remark": req.body.remark1
-        },{
+        }
+    ];
+
+    if(req.body.isbn2){
+        isbns.push({
             "isbn": req.body.isbn2,
             "mode": req.body.mode2,
             "count": req.body.count2,
             "remark": req.body.remark2
-        },{
+        });
+    }
+    if(req.body.isbn3){
+        isbns.push({
             "isbn": req.body.isbn3,
             "mode": req.body.mode3,
             "count": req.body.count3,
             "remark": req.body.remark3
-        }
-    ];
+        });
+    }
     var url = prop.booksearch_url + prop.app_id;
     var error_list = [];
     var err_str = "";
