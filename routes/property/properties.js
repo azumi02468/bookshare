@@ -6,7 +6,8 @@ exports.title = 'BookShare';
 exports.version = '0.0.1';
 
 // mongoDB接続先
-exports.mongodb = 'mongodb://localhost/mydb';
+//exports.mongodb = 'mongodb://localhost/mydb';
+exports.mongodb = 'mongodb://heroku_prcn7vr4:rdrou429u11det6rk1leqr5adn@ds041496.mlab.com:41496/heroku_prcn7vr4';
 
 // WEB-API
 exports.booksearch_url = 'https://app.rakuten.co.jp/services/api/BooksBook/Search/20130522?format=json&formatVersion=2&applicationId=';
