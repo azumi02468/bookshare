@@ -198,7 +198,6 @@ angular.module("updateModule", [])
 
         // クリックイベント
         $scope.click = function(data){
-            console.log("クリックされたのは、" + data.title);
             $scope.u_title = data.title;
             $scope.u_author = data.author;
             $scope.u_publisherName = data.publisherName;

@@ -3,7 +3,7 @@
 exports.title = 'BookShare';
 
 // バージョン情報
-exports.version = '0.0.1';
+exports.version = '0.1.0';
 
 // mongoDB接続先
 //exports.mongodb = 'mongodb://localhost/mydb';
